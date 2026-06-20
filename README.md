@@ -40,6 +40,43 @@ The stack is intentionally focused. It does not include unrelated model training
 
 ```mermaid
 flowchart TD
+    Input[Input: app_inventory.xlsx]
+    Orchestrator[Orchestrator<br/>Load Excel, validate columns,<br/>normalize descriptions,<br/>mechanical pre-tagging,<br/>group by L3]
+    Successor[Portfolio Successor Detector<br/>Runs once on full inventory<br/>Rule pass + LLM pass<br/>Produces successor_map.json]
+    Loop{For each L3 cluster}
+    Agent1[Agent 1: Function Tagger<br/>Applies 18 function rules<br/>Uses few-shot examples<br/>Re-tags only failing apps on retry]
+    Validator{Validator<br/>Python rules +<br/>semantic LLM checks}
+    Agent2[Agent 2: ECR Recommender<br/>Decides Retain / Eliminate / Consolidate<br/>Reads function tags + successor map<br/>Flags function mismatches]
+    MismatchCheck{Function<br/>mismatch?}
+    Guards[Deterministic ECR Guards<br/>Validate replacements exist<br/>Enforce schema<br/>Flip invalid Eliminate to Retain]
+    GroupPost[Consolidate Group Post-Processor<br/>Unifies group rationale and target<br/>Flips group target to Consolidate]
+    Reviewer[Reviewer Agent<br/>Confidence score per row<br/>Concerns per cluster<br/>Does not change decisions]
+    Calibration[Calibration Check<br/>Portfolio-level thresholds<br/>Warns if counts too low]
+    Output[Excel Output<br/>Summary + Results + Successor Map<br/>Color-coded by recommendation<br/>Grouped Consolidate visual]
+    Retry[Retry counter<br/>max 5 across all loops]
+
+    Input --> Orchestrator
+    Orchestrator --> Successor
+    Successor --> Loop
+    Loop --> Agent1
+    Agent1 --> Validator
+    Validator -->|invalid| Retry
+    Retry -->|retry budget OK| Agent1
+    Retry -->|exhausted| Output
+    Validator -->|valid| Agent2
+    Agent2 --> MismatchCheck
+    MismatchCheck -->|mismatch| Retry
+    MismatchCheck -->|clean| Guards
+    Guards --> GroupPost
+    GroupPost --> Reviewer
+    Reviewer --> Loop
+    Loop -->|all clusters done| Calibration
+    Calibration --> Output
+```
+## Architecture
+
+```mermaid
+flowchart TD
     A["Excel Inventory"] --> B["Orchestrator<br/>normalize columns + group by L3"]
     B --> C["Agent 1<br/>Function Tagger"]
     C --> D["Hybrid Validator<br/>Python checks + LLM review"]
