@@ -37,6 +37,8 @@ Public synthetic examples are included:
 The stack is intentionally focused. It does not include unrelated model training, Kubernetes, Databricks, or web search because the core use case is reliable LLM-assisted decision automation over structured enterprise inventory data.
 
 ## Architecture
+<img width="2720" height="4331" alt="image" src="https://github.com/user-attachments/assets/66d86801-4277-4826-b853-5f807a769566" />
+
 
 ```mermaid
 flowchart TD
