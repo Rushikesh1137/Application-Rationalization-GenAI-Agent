@@ -1,0 +1,16 @@
+{
+  "workbook": "sample_output\\ecr_results_demo.xlsx",
+  "summary": {
+    "total_rows": 37,
+    "retain_count": 17,
+    "eliminate_count": 7,
+    "consolidate_count": 13,
+    "l3_count": 7,
+    "invalid_recommendation_count": 0,
+    "blank_function_count": 0,
+    "target_outside_cluster_count": 0,
+    "self_eliminate_count": 0,
+    "capability_loss_warning_count": 0
+  },
+  "warnings": []
+}

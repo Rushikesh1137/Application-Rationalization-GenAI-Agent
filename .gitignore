@@ -1,0 +1,52 @@
+# Environment and secrets
+.env
+*.key
+*.pem
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local run data
+input/*
+!input/README.md
+!input/.gitkeep
+output/*
+!output/README.md
+!output/.gitkeep
+logs/*
+!logs/README.md
+!logs/.gitkeep
+
+# Public synthetic demo artifacts are intentionally committed.
+!sample_data/
+!sample_data/**
+!sample_output/
+!sample_output/**
+
+# Generated archives and local snapshots
+approach_archives/
+20260507_approach_snapshots/
+*.zip
+
+# Excel and text run outputs
+*.xlsx
+*.xls
+*.xlsm
+*.tsv
+*.log
+!sample_data/*.xlsx
+!sample_output/*.xlsx
+!sample_output/*.md
+!sample_output/*.json
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,12 @@
+langgraph
+langchain
+langchain-openai
+openai
+pandas
+openpyxl
+python-dotenv
+truststore
+pydantic
+fastapi
+uvicorn[standard]
+python-multipart
