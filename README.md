@@ -2,11 +2,11 @@
 
 A production-style GenAI workflow for enterprise application rationalization. The system reads an application inventory workbook, groups apps by L3 business capability, assigns Function tags, and produces ECR recommendations: `Retain`, `Eliminate`, or `Consolidate`.
 
-The project is built to show practical AI engineering: LangGraph agents, OpenAI-compatible LLM calls, prompt design, structured response handling, deterministic validation, evaluation reporting, a FastAPI service layer, Docker packaging, and CI.
+The project is built to show practical AI engineering: LangGraph agents, OpenAI-compatible LLM calls, prompt design, structured response handling, deterministic validation, evaluation reporting, a FastAPI service layer.
 
 ## Business Problem
 
-Large enterprises often maintain thousands of application records across CMDBs, spreadsheets, and portfolio tools. Rationalization teams manually inspect app descriptions and decide whether each app should be retained, eliminated, or consolidated. This project automates that analysis while keeping human-readable rationale and review guardrails.
+Large enterprises often maintain thousands of application records across CMDBs, spreadsheets, and portfolio tools. Rationalization teams manually inspect app descriptions and decide whether each app should be retained, eliminated, or consolidated. This project automates that analysis while keeping human-readable rationale and review guardrails. This helps in cost reduction and overall savings at an enterprise level.
 
 ## What It Produces
 
